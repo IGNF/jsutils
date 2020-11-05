@@ -1,0 +1,24 @@
+{
+  "name": "jsutils",
+  "version": "1.0.0",
+  "description": "Ensemble de classes utilitaires javascripts (plugins jquery ...)",
+  "main": "utils.js",
+  "repository": "ssh://git@gitlab.dockerforge.ign.fr:10022/bduni/jsutils.git",
+  "author": "pprevautel <philippe.prevautel@ign.fr>",
+  "contributors": [
+    "pprevautel <philippe.prevautel@ign.fr>",
+    "slafay <sylvain.lafay@ign.fr"
+  ],
+  "license": "Propriétaire",
+  "dependencies": {
+    "autolinker": "^3.14.2",
+    "bootbox": "^5.5.1",
+    "bootstrap-filestyle": "^1.2.1",
+    "bootstrap-typeahead": "^2.3.2",
+    "colorpicker": "^2.0.0",
+    "datetimepicker": "^0.1.39",
+    "geoportal-extensions-openlayers": "^3.0.12",
+    "jquery-file-upload": "^4.0.11",
+    "tablesorter": "^2.31.3"
+  }
+}
