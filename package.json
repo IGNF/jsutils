@@ -19,6 +19,7 @@
     "datetimepicker": "^0.1.39",
     "geoportal-extensions-openlayers": "^3.0.12",
     "jquery-file-upload": "^4.0.11",
+    "moment": "^2.29.1",
     "tablesorter": "^2.31.3"
   }
 }
