@@ -14,7 +14,7 @@ module.exports = {
      * Returns unique identifier
      * @returns {String}
      */
-    guid : function () {
+    guid: function () {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
@@ -87,7 +87,7 @@ module.exports = {
      * Supprime les accents d'une chaine de caracteres
      * œ => OE et æ => AE
      */
-    removeDiacritics: function(str) {
+    /*removeDiacritics: function(str) {
         function removeLigature(s) {
             return s.replace(/\u0152/g, 'OE')
                 .replace(/\u0153/g, 'oe')
@@ -101,7 +101,7 @@ module.exports = {
         var s = str.normalize('NFD');
         s = removeLigature(s);
         return s.replace(/[\u0300-\u036f]/g, "");
-    },
+    },*/
 
     regexHelp: {
         /**
