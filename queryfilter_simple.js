@@ -9,12 +9,24 @@ module.exports = {
             var complement = {};
 
             switch(attribute.type) {
-                case 'String':
-                    complement['type'] = 'string';
-                    complement['input'] = 'text';
-                    complement['operators'] = ['equal','not_equal','is_empty','is_not_empty'];
-                    if (attribute.nullable) {
-                        complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
+                case 'String':				
+					complement['type'] = 'string';
+                    if (! attribute.listOfValues) {
+                        complement['input'] = 'text';
+                        complement['operators'] = ['equal','not_equal','is_empty','is_not_empty'];
+						if (attribute.nullable) {
+							complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
+						}
+                    } else if (Array.isArray(attribute.listOfValues)) {  // Array
+                        complement['input'] = 'select';
+                        complement['values'] = attribute.listOfValues;
+                        complement['operators'] = ['in','not_in','is_empty','is_not_empty'];
+                        complement['multiple'] = true;
+                    } else if (utils.isObject(attribute.listOfValues)) {
+                        complement['input'] = 'select';
+                        complement['values'] = utils.swapKeyValue(attribute.listOfValues);
+                        complement['operators'] = ['in','not_in','is_empty','is_not_empty'];
+                        complement['multiple'] = true;
                     }
                     break;
                 case 'Integer':
@@ -38,26 +50,6 @@ module.exports = {
                     complement['input'] = 'select';
                     complement['operators'] = ['equal'];
                     complement['values'] = ['true','false'];
-                    if (attribute.nullable) {
-                        complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
-                    }
-                    break;
-                case 'Choice':
-                    complement['type'] = 'string';
-                    if (! attribute.listOfValues) {
-                        complement['input'] = 'text';
-                        complement['operators'] = ['equal','not_equal','not_ends_with','is_empty','is_not_empty'];
-                    } else if (Array.isArray(attribute.listOfValues)) {  // Array
-                        complement['input'] = 'select';
-                        complement['values'] = attribute.listOfValues;
-                        complement['operators'] = ['in','not_in','is_empty','is_not_empty'];
-                        complement['multiple'] = true;
-                    } else if (utils.isObject(attribute.listOfValues)) {
-                        complement['input'] = 'select';
-                        complement['values'] = utils.swapKeyValue(attribute.listOfValues);
-                        complement['operators'] = ['in','not_in','is_empty','is_not_empty'];
-                        complement['multiple'] = true;
-                    }
                     if (attribute.nullable) {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }

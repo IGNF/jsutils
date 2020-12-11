@@ -10,11 +10,23 @@ module.exports = {
 
             switch(attribute.type) {
                 case 'String':
-                    complement['type'] = 'string';
-                    complement['input'] = 'text';
-                    complement['operators'] = ['equal','not_equal','begins_with','not_begins_with','contains','not_contains','ends_with','not_ends_with','is_empty','is_not_empty'];
-                    if (attribute.nullable) {
-                        complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
+					complement['type'] = 'string';
+                    if (! attribute.listOfValues) {
+                        complement['input'] = 'text';
+                        complement['operators'] = ['equal','not_equal','begins_with','not_begins_with','contains','not_contains','ends_with','not_ends_with','is_empty','is_not_empty'];
+						if (attribute.nullable) {
+							complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
+						}
+                    } else if (Array.isArray(attribute.listOfValues)) {  // Array
+                        complement['input'] = 'select';
+                        complement['values'] = attribute.listOfValues;
+                        complement['operators'] = ['in','not_in','is_empty','is_not_empty'];
+                        complement['multiple'] = true;
+                    } else if (utils.isObject(attribute.listOfValues)) {
+                        complement['input'] = 'select';
+                        complement['values'] = utils.swapKeyValue(attribute.listOfValues);
+                        complement['operators'] = ['in','not_in','is_empty','is_not_empty'];
+                        complement['multiple'] = true;
                     }
                     break;
                 case 'Integer':
@@ -42,36 +54,18 @@ module.exports = {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }
                     break;
-                case 'Choice':
-                    complement['type'] = 'string';
-                    if (! attribute.listOfValues) {
-                        complement['input'] = 'text';
-                        complement['operators'] = ['equal','not_equal','begins_with','not_begins_with','contains','not_contains','ends_with','not_ends_with','is_empty','is_not_empty'];
-                    } else if (Array.isArray(attribute.listOfValues)) {  // Array
-                        complement['input'] = 'select';
-                        complement['values'] = attribute.listOfValues;
-                        complement['operators'] = ['in','not_in','is_empty','is_not_empty'];
-                        complement['multiple'] = true;
-                    } else if (utils.isObject(attribute.listOfValues)) {
-                        complement['input'] = 'select';
-                        complement['values'] = utils.swapKeyValue(attribute.listOfValues);
-                        complement['operators'] = ['in','not_in','is_empty','is_not_empty'];
-                        complement['multiple'] = true;
-                    }
-                    if (attribute.nullable) {
-                        complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
-                    }
-                    break;
                 case 'Date':
                 case 'DateTime':
-                    complement['type'] = 'datetime';
+					var type = (attribute.type === 'Date') ? 'date' : 'datetime';
+					var format = (attribute.type === 'Date') ? 'yyyy-mm-dd' : 'yyyy-mm-dd hh:mm:ss';
+                    complement['type'] = type;
                     complement['operators'] = ['equal','not_equal','less','less_or_equal','greater','greater_or_equal','between','not_between','is_empty','is_not_empty'];
                     if (attribute.nullable) {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }
-                    complement['plugin'] = 'datepicker';
+                    complement['plugin'] = 'datetimepicker';
                     complement['plugin_config'] = {
-                        format: 'yyyy-mm-dd',
+                        format: format,
                         todayHighlight: true,
                         autoclose: true
                     };
