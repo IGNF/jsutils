@@ -65,7 +65,7 @@ module.exports = {
                     complement['plugin_config'] = {
                         locale: 'fr',
                         format: (attribute.type === 'Date') ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss',
-                        useCurrent: useCurrent,
+                        useCurrent: true,
                         buttons: {
                             showToday: true,
                             showClear: true,
