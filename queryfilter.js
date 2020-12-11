@@ -56,18 +56,21 @@ module.exports = {
                     break;
                 case 'Date':
                 case 'DateTime':
-					var type = (attribute.type === 'Date') ? 'date' : 'datetime';
-					var format = (attribute.type === 'Date') ? 'yyyy-mm-dd' : 'yyyy-mm-dd hh:mm:ss';
-                    complement['type'] = type;
+                    complement['type'] = (attribute.type === 'Date') ? 'date' : 'datetime';
                     complement['operators'] = ['equal','not_equal','less','less_or_equal','greater','greater_or_equal','between','not_between','is_empty','is_not_empty'];
                     if (attribute.nullable) {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }
                     complement['plugin'] = 'datetimepicker';
                     complement['plugin_config'] = {
-                        format: format,
-                        todayHighlight: true,
-                        autoclose: true
+                        locale: 'fr',
+                        format: (attribute.type === 'Date') ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss',
+                        useCurrent: useCurrent,
+                        buttons: {
+                            showToday: true,
+                            showClear: true,
+                            showClose: true
+                        }
                     };
                     break;
                 default:break;
