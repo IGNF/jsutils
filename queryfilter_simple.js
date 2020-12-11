@@ -46,10 +46,10 @@ module.exports = {
                     }
                     break;
                 case 'Boolean':
-                    complement['type'] = 'string';
-                    complement['input'] = 'select';
+                    complement['type'] = 'boolean';
+                    complement['input'] = 'radio';
                     complement['operators'] = ['equal'];
-                    complement['values'] = ['true','false'];
+                    complement['values'] = [true,false];
                     if (attribute.nullable) {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }
@@ -62,10 +62,11 @@ module.exports = {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }
                     complement['plugin'] = 'datepicker';
+                    complement['input_event'] = 'change.datetimepicker';
                     complement['plugin_config'] = {
                         locale: 'fr',
                         format: (attribute.type === 'Date') ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss',
-                        useCurrent: true,
+                        useCurrent: 'day',
                         buttons: {
                             showToday: true,
                             showClear: true,
