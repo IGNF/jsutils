@@ -61,7 +61,7 @@ module.exports = {
                     if (attribute.nullable) {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }
-                    complement['plugin'] = 'datepicker';
+                    complement['plugin'] = 'datetimepicker';
                     complement['input_event'] = 'change.datetimepicker';
                     complement['plugin_config'] = {
                         locale: 'fr',
