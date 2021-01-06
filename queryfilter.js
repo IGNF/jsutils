@@ -1,6 +1,24 @@
 module.exports = {
     QueryFilter: function() {
         /**
+         * Retourne le format pour les types Date,DateTime,Year et YearMonth
+         * @param {String} type 
+         */
+        function getDateFormat(type) {
+            switch(type) {
+                case 'Date':
+                    return 'YYYY-MM-DD';
+                case 'DateTime':
+                    return 'YYYY-MM-DD HH:mm:ss';
+                case 'Year':
+                    return 'YYYY';
+                case 'YearMonth':
+                    return 'YYYY-MM';
+                default: console.error("Type forbidden");
+            }
+        };
+
+        /**
          *
          * @param {object} attribute
          * @returns object
@@ -32,7 +50,7 @@ module.exports = {
                 case 'Integer':
                     complement['type'] = 'integer';
                     complement['input'] = 'number';
-                    complement['operators'] = ['equal','not_equal','less','less_or_equal','greater','greater_or_equal','between','not_between','is_empty','is_not_empty'];
+                    complement['operators'] = ['equal','not_equal','less','less_or_equal','greater','greater_or_equal','between','not_between'];
                     if (attribute.nullable) {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }
@@ -40,7 +58,7 @@ module.exports = {
                 case 'Double':
                     complement['type'] = 'double';
                     complement['input'] = 'number';
-                    complement['operators'] = ['less','less_or_equal','greater','greater_or_equal','between','not_between','is_empty','is_not_empty'];
+                    complement['operators'] = ['less','less_or_equal','greater','greater_or_equal','between','not_between'];
                     if (attribute.nullable) {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
                     }
@@ -56,7 +74,9 @@ module.exports = {
                     break;
                 case 'Date':
                 case 'DateTime':
-                    complement['type'] = (attribute.type === 'Date') ? 'date' : 'datetime';
+                case 'Year':
+                case 'YearMonth':
+                    complement['type'] = (attribute.type === 'DateTime') ? 'datetime' : 'date';                  
                     complement['operators'] = ['equal','not_equal','less','less_or_equal','greater','greater_or_equal','between','not_between','is_empty','is_not_empty'];
                     if (attribute.nullable) {
                         complement['operators'] = complement['operators'].concat(['is_null', 'is_not_null']);
@@ -65,7 +85,7 @@ module.exports = {
                     complement['plugin'] = 'datetimepicker';
                     complement['plugin_config'] = {
                         locale: 'fr',
-                        format: (attribute.type === 'Date') ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss',
+                        format: getDateFormat(attribute.type),
                         useCurrent: 'day',
                         buttons: {
                             showToday: true,
