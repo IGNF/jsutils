@@ -115,7 +115,7 @@ module.exports = {
 
                 var filter = {
                     id: attribute.name,
-                    label: attribute.name
+                    label: attribute.title
                 };
 
                 var complement = getFilterComplement(attribute);
