@@ -38,9 +38,27 @@ module.exports = {
         }
         return result;
     },
-        
+       
     /**
-     * Verifie si object est bein un objet js
+     * Verifie si n est un entier
+     * @param {mixed} n 
+     * @returns 
+     */
+    isInteger: function(n){
+        return Number(n) === n && n % 1 === 0;
+    },
+    
+    /**
+     * Verifie si n est un flottant
+     * @param {mixed} n 
+     * @returns 
+     */
+    isFloat: function (n){
+        return Number(n) === n && n % 1 !== 0;
+    },
+
+    /**
+     * Verifie si object est bien un objet js
      * @param {Object} object
      * @returns {Boolean}
      */
