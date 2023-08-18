@@ -1,5 +1,5 @@
 {
-  "name": "jsutils",
+  "name": "@ign-mut/jsutils",
   "version": "1.0.2",
   "description": "Ensemble de classes utilitaires javascripts (plugins jquery ...)",
   "main": "utils.js",
