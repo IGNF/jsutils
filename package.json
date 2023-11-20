@@ -12,7 +12,6 @@
   "license": "Propriétaire",
   "dependencies": {
     "autolinker": "^3.14.2",
-    "bootbox": "^5.5.1",
     "bootstrap-filestyle": "^1.2.1",
     "bootstrap-typeahead": "^2.3.2",
     "colorpicker": "^2.0.0",
