@@ -11,14 +11,7 @@
   ],
   "license": "Propriétaire",
   "dependencies": {
-    "autolinker": "^3.14.2",
-    "bootstrap-filestyle": "^1.2.1",
-    "bootstrap-typeahead": "^2.3.2",
-    "colorpicker": "^2.0.0",
     "datetimepicker": "^0.1.39",
-    "geoportal-extensions-openlayers": "^3.0.12",
-    "jquery-file-upload": "^4.0.11",
-    "moment": "^2.29.1",
-    "tablesorter": "^2.31.3"
+    "jquery": ">=1.6"
   }
 }
