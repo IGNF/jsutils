@@ -3,7 +3,6 @@
   "version": "1.0.2",
   "description": "Ensemble de classes utilitaires javascripts (plugins jquery ...)",
   "main": "utils.js",
-  "repository": "ssh://git@gitlab.dockerforge.ign.fr:10022/bduni/jsutils.git",
   "author": "pprevautel <philippe.prevautel@ign.fr>",
   "contributors": [
     "pprevautel <philippe.prevautel@ign.fr>",
